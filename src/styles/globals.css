@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+}
+
+/* TEMPLATE: Use Dark mode here. */
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+            to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))
+        )
+        rgb(var(--background-start-rgb));
+}
+
+@layer components {
+    /* Base Button Style. Extend this to create more button components */
+    .button {
+        @apply flex items-center justify-center outline-none border-none bg-grey-dark text-white rounded
+      w-full drop-shadow-sm transition-all duration-150 ease-in-out;
+    }
+    .button:hover {
+        @apply bg-opacity-50;
+    }
+
+    /* Base Dropdown Selector Styles */
+    .select {
+        @apply text-black text-sm relative inline-block min-w-[150px];
+    }
+    .select-button {
+        @apply leading-none border border-black rounded px-3 py-2 transition-all block w-full text-left;
+    }
+    .select-button[data-headlessui-state="open"] {
+        @apply rounded-b-none;
+    }
+    .select-options {
+        @apply absolute w-full max-h-[100px] overflow-x-hidden overflow-y-auto border rounded border-black bg-white divide-y divide-grey-dark;
+    }
+    .select-options[data-headlessui-state="open"] {
+        @apply rounded-t-none border-t-0;
+    }
+    .select-options li {
+        @apply leading-none px-3 py-2 cursor-pointer;
+    }
+    .select-options li:hover {
+        @apply bg-black/10;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}

@@ -1,0 +1,11 @@
+clsx
+estree
+headlessui
+immer
+libphonenumber
+notistack
+openapi
+prebuild
+tailwindcss
+tanstack
+zustand

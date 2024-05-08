@@ -1,0 +1,13 @@
+{
+    // Our recommendended extensions
+    "recommendations": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss",
+        "dsznajder.es7-react-js-snippets",
+        "eamodio.gitlens"
+    ],
+    // Pretter ESLint extension is no longer required with the eslint-config-prettier
+    // plugin. Not recommended as it is difficult to manage 2 prettier extensions.
+    "unwantedRecommendations": ["rvest.vs-code-prettier-eslint"]
+}

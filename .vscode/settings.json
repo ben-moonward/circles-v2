@@ -1,0 +1,8 @@
+// Project-specific VSCode settings. These are here to maintain settings consistency between developer's machines.
+// Please install the recommended extensions found in extensions.json first.
+
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+}
