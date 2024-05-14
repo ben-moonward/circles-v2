@@ -6,6 +6,16 @@
     --foreground-rgb: 0, 0, 0;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #c2c9d2;
+}
+
 /* TEMPLATE: Use Dark mode here. */
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -28,7 +38,7 @@ body {
 @layer components {
     /* Base Button Style. Extend this to create more button components */
     .button {
-        @apply flex items-center justify-center outline-none border-none bg-grey-dark text-white rounded
+        @apply flex items-center justify-center outline-none border-none text-white rounded
       w-full drop-shadow-sm transition-all duration-150 ease-in-out;
     }
     .button:hover {

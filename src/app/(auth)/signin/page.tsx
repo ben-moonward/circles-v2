@@ -8,3 +8,5 @@ export default function Page() {
         </main>
     );
 }
+
+// root page is the dashboard

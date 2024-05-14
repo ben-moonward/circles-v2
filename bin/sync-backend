@@ -1,0 +1,3 @@
+if [ ! -z \"$SWAGGER_JSON_URL\" ]; 
+then npx openapi-typescript $SWAGGER_JSON_URL -o ./backend-sdk/schema.d.ts; 
+else echo \"Error: Missing SWAGGER_JSON_URL\"; fi

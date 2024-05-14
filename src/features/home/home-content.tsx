@@ -6,7 +6,7 @@ type Props = {
 };
 
 const HomeContent: FC<Props> = ({ className = "" }) => {
-    return <div className={cn("", className)}>Home Content</div>;
+    return <div className={cn("py-8", className)}>Home Content</div>;
 };
 
 export default HomeContent;

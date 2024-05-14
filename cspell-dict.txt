@@ -6,6 +6,7 @@ libphonenumber
 notistack
 openapi
 prebuild
+Smartre
 tailwindcss
 tanstack
 zustand
