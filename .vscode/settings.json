@@ -8,5 +8,9 @@
     "cSpell.words": ["Smartre"],
     "files.associations": {
         "*.css": "tailwindcss"
-    }
+    },
+    "tailwindCSS.experimental.classRegex": [
+        ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    ]
 }

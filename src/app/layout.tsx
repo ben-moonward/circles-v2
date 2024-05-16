@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Providers from "./providers";
-import Sidebar from "@/components/layout/sidebar";
 import cn from "@/utils/cn";
 import "@/styles/globals.css";
 
@@ -22,12 +21,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body
-                className={cn(
-                    font.className,
-                    "bg-Monotone-LightSmoke text-black ",
-                )}
-            >
+            <body className={cn(font.className, "antialiased text-black ")}>
                 <Providers>{children}</Providers>
             </body>
         </html>

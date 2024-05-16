@@ -1,6 +1,4 @@
 import Card from "@/components/common/card";
-import PageWrapper from "@/components/layout/page-wrapper";
-import HomeContent from "@/features/home/home-content";
 
 export default function Page() {
     return (

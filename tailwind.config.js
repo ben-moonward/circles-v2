@@ -19,6 +19,7 @@ const config = {
                 Monotone: {
                     Smoke: "#EDEDED",
                     LightSmoke: "#F9F9F9",
+                    DarkSmoke: "#D8D8D8",
                     SuperDarkSmoke: "#909090",
                     Charcoal: "#141414",
                 },

@@ -6,6 +6,7 @@ libphonenumber
 notistack
 openapi
 prebuild
+signin
 Smartre
 tailwindcss
 tanstack

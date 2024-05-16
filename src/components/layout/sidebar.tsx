@@ -2,8 +2,10 @@ import CirclesLogoIcon from "@/components/icons/circles-logo-icon";
 import DashboardIcon from "@/components/icons/sidebar/dashboard-icon";
 import cn from "@/utils/cn";
 import { ClassValue } from "clsx";
-import React, { FC, Suspense } from "react";
+import React, { FC } from "react";
 import SidebarItem from "./sidebar-item";
+import LogoutIcon from "../icons/sidebar/logout-icon";
+import { logout } from "@/actions/auth";
 
 type SidebarProps = {
     className?: ClassValue;
@@ -12,8 +14,8 @@ type SidebarProps = {
 const Sidebar: FC<SidebarProps> = ({ className = "" }) => {
     return (
         <nav className={cn("bg-CoreBrand-BrightBlue", className)}>
-            <div className="h-full flex flex-col gap-6 items-center mt-6 overflow-y-auto">
-                <CirclesLogoIcon />
+            <div className="h-full flex flex-col gap-6 items-center py-6 overflow-y-auto">
+                <CirclesLogoIcon className="" />
                 <SidebarItem
                     icon={<DashboardIcon />}
                     label="Dashboard"
@@ -34,8 +36,32 @@ const Sidebar: FC<SidebarProps> = ({ className = "" }) => {
                     label="Prospects"
                     slug="prospects"
                 />
+                <SidebarItem
+                    icon={<DashboardIcon />}
+                    label="Resources"
+                    slug="resources"
+                />
+                <div className="flex-1" />
+                <LogoutButton />
             </div>
         </nav>
+    );
+};
+
+const LogoutButton = () => {
+    return (
+        <form action={logout} className="contents">
+            <button
+                className={cn(
+                    "w-full py-3 -my-3 flex flex-col gap-1 items-center justify-center hover:bg-white/40 transition-colors text-white",
+                )}
+            >
+                <LogoutIcon />
+                <p className={cn("leading-none text-[10px] font-semibold")}>
+                    Logout
+                </p>
+            </button>
+        </form>
     );
 };
 

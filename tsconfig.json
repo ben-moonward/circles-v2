@@ -19,6 +19,7 @@
         ],
         "baseUrl": ".",
         "paths": {
+            "@/actions/*": ["src/actions/*"],
             "@/app/*": ["src/app/*"],
             "@/components/*": ["src/components/*"],
             "@/icons/*": ["src/components/icons/*"],

@@ -1,24 +1,18 @@
 "use client";
 
-import cn from "@/utils/cn";
+import cn, { ClassValue } from "@/utils/cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-    FC,
-    ReactNode,
-    startTransition,
-    useEffect,
-    useOptimistic,
-    useState,
-} from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 
 type Props = {
     label: string;
     icon: ReactNode;
     slug: string;
+    className?: ClassValue;
 };
 
-const SidebarItem: FC<Props> = ({ label, icon, slug }) => {
+const SidebarItem: FC<Props> = ({ label, icon, slug, className }) => {
     const [isActive, setIsActive] = useState(false);
     const pathname = usePathname();
 
@@ -32,6 +26,7 @@ const SidebarItem: FC<Props> = ({ label, icon, slug }) => {
             className={cn(
                 "w-full py-3 -my-3 flex flex-col gap-1 items-center justify-center hover:bg-white/40 transition-colors",
                 isActive ? "text-white" : "text-white/40",
+                className,
             )}
             onClick={() => setIsActive(true)}
         >
