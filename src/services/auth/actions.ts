@@ -3,13 +3,17 @@ import "server-only";
 import { cookies } from "next/headers";
 import { SMARTRE_TOKEN_KEY } from "@/constants/keys";
 import { redirect } from "next/navigation";
-import AuthService from "@/services/auth-service";
+import fetcher from "@/utils/fetcher";
 
 export const login = async (formData: FormData) => {
     const email = formData.get("email")?.toString() ?? ""; // todo: streamline getting data from formData
     const password = formData.get("password")?.toString() ?? "";
     try {
-        const { data } = await AuthService.login({
+        const login = fetcher
+            .path("/api/v1/auth/admin/login")
+            .method("post")
+            .create();
+        const { data } = await login({
             email,
             password,
         });

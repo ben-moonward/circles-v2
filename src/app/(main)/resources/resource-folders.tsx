@@ -2,8 +2,8 @@
 
 import { CardRow } from "@/components/common/card";
 import { InfiniteScroll } from "@/components/utilities/infinite-scroll";
-import { getItemsFromPagination } from "@/components/utilities/query";
-import { resourceOptions } from "@/services/options";
+import { getItemsFromPagination } from "@/utils/query";
+import { resourceOptions } from "@/services/resources/options";
 import cn, { ClassValue } from "@/utils/cn";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";

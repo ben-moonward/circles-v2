@@ -5,7 +5,7 @@ import { ClassValue } from "clsx";
 import React, { FC } from "react";
 import SidebarItem from "./sidebar-item";
 import LogoutIcon from "../icons/sidebar/logout-icon";
-import { logout } from "@/actions/auth";
+import { logout } from "@/services/auth/actions";
 
 type SidebarProps = {
     className?: ClassValue;
