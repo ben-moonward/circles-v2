@@ -2,6 +2,7 @@
 
 import { CardRow } from "@/components/common/card";
 import { InfiniteScroll } from "@/components/utilities/infinite-scroll";
+import { getItemsFromPagination } from "@/components/utilities/query";
 import { resourceOptions } from "@/services/options";
 import cn, { ClassValue } from "@/utils/cn";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -14,7 +15,7 @@ type Props = {
 const ResourceFolders = ({ className }: Props) => {
     const { fetchNextPage, data, hasNextPage, isFetchingNextPage } =
         useInfiniteQuery(resourceOptions());
-    const folders = data?.pages.flatMap(a => a.data.data) ?? [];
+    const folders = getItemsFromPagination(data);
 
     return (
         <InfiniteScroll
