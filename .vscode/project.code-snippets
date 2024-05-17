@@ -26,7 +26,7 @@
             "    ${1:prop}: ${2:unknown};",
             "};",
             "",
-            "const ${TM_FILENAME_BASE/(?:^|-)(\\w)/${1:/upcase}/g}: FC<Props> = ({ className = \"\", ${1:prop} }) => {",
+            "const ${TM_FILENAME_BASE/(?:^|-)(\\w)/${1:/upcase}/g}: FC<Props> = ({ className, ${1:prop} }) => {",
             "    return <div className={cn(\"\", className)}>$3</div>;",
             "};",
             "",

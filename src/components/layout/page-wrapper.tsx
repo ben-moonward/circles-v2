@@ -11,8 +11,13 @@ type Props = {
 const PageWrapper: FC<Props> = ({ title, children, className }) => {
     return (
         <>
-            <Header title={title} className={"px-14"} />
-            <div className={cn("h-full overflow-y-scroll px-14", className)}>
+            <Header title={title} className={"px-14 h-[88px]"} />
+            <div
+                className={cn(
+                    "h-[calc(100vh-88px)] overflow-y-scroll px-14",
+                    className,
+                )}
+            >
                 <Suspense fallback="LOADING">{children}</Suspense>
             </div>
         </>

@@ -1,6 +1,6 @@
 import Button from "@/components/common/button";
 import Card from "@/components/common/card";
-import DoubleChevron from "@/components/icons/double-chevron";
+import DoubleChevron from "@/components/icons/double-chevron-icon";
 import { SMARTRE_TOKEN_KEY } from "@/constants/keys";
 import SignUpForm from "@/features/sign-up/sign-up-form";
 import fetcher from "@/utils/fetcher";

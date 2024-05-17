@@ -1,7 +1,7 @@
 import { login } from "@/actions/auth";
 import Button from "@/components/common/button";
-import DoubleChevron from "@/components/icons/double-chevron";
-import SmartreInput from "@/components/inputs/input";
+import DoubleChevron from "@/components/icons/double-chevron-icon";
+import SmartreInput from "@/components/inputs/smartre-input";
 import React, { FC, useActionState } from "react";
 
 type Props = {};

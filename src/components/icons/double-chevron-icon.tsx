@@ -1,4 +1,7 @@
-const DoubleChevron = ({ color, ...props }: React.SVGProps<SVGSVGElement>) => {
+const DoubleChevronIcon = ({
+    color,
+    ...props
+}: React.SVGProps<SVGSVGElement>) => {
     return (
         <svg
             width="15"
@@ -20,4 +23,4 @@ const DoubleChevron = ({ color, ...props }: React.SVGProps<SVGSVGElement>) => {
     );
 };
 
-export default DoubleChevron;
+export default DoubleChevronIcon;

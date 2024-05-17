@@ -16,6 +16,7 @@ const SidebarItem: FC<Props> = ({ label, icon, slug, className }) => {
     const [isActive, setIsActive] = useState(false);
     const pathname = usePathname();
 
+    // todo: fix root (/) not showing active state for dashboard. refactor (use 1 state)
     useEffect(() => {
         setIsActive(pathname.split("/")[1] === slug);
     }, [pathname, slug]);

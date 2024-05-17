@@ -1,22 +1,28 @@
 import { useMemo, useState } from "react";
 
-export type FetchActionResponse<TData> = {
-    items: TData[];
-    page: number;
+export type FetchAction<FetchActionResponse> = (params: {
+    query: {
+        page: number;
+        perPage: number;
+    };
+}) => Promise<FetchActionResponse>;
+
+export type GetNextPageParamArgs<FetchActionResponse> = (
+    lastPage: FetchActionResponse | undefined,
+    allPages: FetchActionResponse[],
+) => number | undefined;
+
+export type UsePaginatedQueryArgs<FetchActionResponse> = {
+    initialData?: FetchActionResponse;
+    initialPage?: number;
+    fetchAction: FetchAction<FetchActionResponse>;
+    parameters: Parameters<FetchAction<FetchActionResponse>>[0];
+    getNextPageParam: GetNextPageParamArgs<FetchActionResponse>;
 };
 
-export type FetchAction<TData> = (params: {
-    page: number;
-}) => Promise<FetchActionResponse<TData>>;
-
-export type UsePaginatedQueryArgs<TData> = {
-    initialData?: FetchActionResponse<TData>;
-    fetchAction: FetchAction<TData>;
-    parameters: Parameters<FetchAction<TData>>[0];
-};
-
-export type UsePaginatedQueryResult<TData> = {
-    items: TData[];
+export type UsePaginatedQueryResult<FetchActionResponse> = {
+    pages: FetchActionResponse[];
+    hasNextPage: boolean;
     fetchNextPage: () => void;
     fetchPrevPage: () => void;
 };
@@ -24,27 +30,38 @@ export type UsePaginatedQueryResult<TData> = {
 /**
  * usePaginatedQuery
  */
-const usePaginatedQuery = <TData>({
+const usePaginatedQuery = <FetchActionResponse>({
     initialData,
+    initialPage = 1,
     fetchAction,
     parameters,
-}: UsePaginatedQueryArgs<TData>): UsePaginatedQueryResult<TData> => {
-    const { pages, items, getPage, addPage } = usePageMap(initialData);
+    getNextPageParam,
+}: UsePaginatedQueryArgs<FetchActionResponse>): UsePaginatedQueryResult<FetchActionResponse> => {
+    const { pages, pageNumbers, getPage, addPage } = usePageMap(initialData);
+
+    const latestPage = pageNumbers.reduce(
+        (prev, curr) => (curr > prev ? curr : prev),
+        0,
+    );
+    const nextPage = useMemo(() => {
+        return latestPage !== 0
+            ? getNextPageParam(getPage(latestPage), pages)
+            : initialPage;
+    }, [getNextPageParam, getPage, initialPage, latestPage, pages]);
+
+    const hasNextPage = !!nextPage;
 
     const fetchPage = async (page: number) => {
         if (getPage(page)) return;
-        const res = await fetchAction({ ...parameters, page });
-        addPage(page, res.items);
+        const response = await fetchAction({
+            ...parameters,
+            query: { ...parameters.query, page },
+        });
+        addPage(page, response);
     };
 
-    const pageNumbers = pages.map(([page]) => page);
-
     const fetchNextPage = () => {
-        const latestPage = pageNumbers.reduce(
-            (prev, curr) => (curr > prev ? curr : prev),
-            0,
-        );
-        fetchPage(latestPage + 1);
+        if (hasNextPage && nextPage) fetchPage(nextPage);
     };
 
     const fetchPrevPage = () => {
@@ -54,30 +71,38 @@ const usePaginatedQuery = <TData>({
         fetchPage(earliestPage - 1);
     };
 
-    return { items, fetchNextPage, fetchPrevPage };
+    return { pages, fetchNextPage, fetchPrevPage, hasNextPage };
 };
 
 /**
  * Effectively a page 'cache' on the client side stored in state.
+ * Stores FetchActionResponse by page number.
  */
-const usePageMap = <TData>(initialData?: FetchActionResponse<TData>) => {
+const usePageMap = <FetchActionResponse>(initialData?: FetchActionResponse) => {
     const [pageMap, setPageMap] = useState(
-        new Map<number, TData[]>(
-            initialData ? [[initialData.page, initialData.items]] : null,
+        new Map<number, FetchActionResponse>(
+            initialData ? [[1, initialData]] : null,
         ),
     );
-    const pages = useMemo(() => Array.from(pageMap.entries()), [pageMap]);
-    const items = useMemo(() => pages.flatMap(([_, items]) => items), [pages]);
+    const pageEntries = useMemo(() => Array.from(pageMap.entries()), [pageMap]);
+    const pageNumbers = useMemo(
+        () => pageEntries.map(([pageNumber, _]) => pageNumber),
+        [pageEntries],
+    );
+    const pages = useMemo(
+        () => pageEntries.map(([_, response]) => response),
+        [pageEntries],
+    );
 
-    const addPage = (page: number, items: TData[]) => {
-        setPageMap(new Map(pageMap.set(page, items)));
+    const addPage = (page: number, response: FetchActionResponse) => {
+        setPageMap(new Map(pageMap.set(page, response)));
     };
 
-    const getPage = (page: number): TData[] | undefined => {
+    const getPage = (page: number): FetchActionResponse | undefined => {
         return pageMap.get(page);
     };
 
-    return { pages, items, getPage, addPage };
+    return { pages, pageNumbers, getPage, addPage };
 };
 
 export default usePaginatedQuery;

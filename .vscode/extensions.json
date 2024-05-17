@@ -5,6 +5,7 @@
         "dbaeumer.vscode-eslint",
         "bradlc.vscode-tailwindcss",
         "dsznajder.es7-react-js-snippets",
+        "streetsidesoftware.code-spell-checker",
         "eamodio.gitlens"
     ],
     // Pretter ESLint extension is no longer required with the eslint-config-prettier
